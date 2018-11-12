@@ -3,6 +3,8 @@ package lone.wolf.springbootstudy.service;
 import lone.wolf.springbootstudy.domain.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Description
  * @Author hechunhui
@@ -10,4 +12,8 @@ import org.springframework.stereotype.Service;
  */
 public interface UserService {
     int add(User user);
+    List<User> getAll();
+    User findById(long id);
+    void update(User user);
+    void delete(long id);
 }

@@ -23,11 +23,11 @@ public class ClientApplication {
 @SpringBootApplication
 @ServletComponentScan
 @MapperScan("lone.wolf.springbootstudy.mapper")
-public class ClientApplication extends SpringBootServletInitializer {
-    @Override
+public class ClientApplication /*extends SpringBootServletInitializer*/ {
+  /*  @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(ClientApplication.class);
-    }
+    }*/
 
     public static void main(String[] args) {
         SpringApplication.run(ClientApplication.class, args);

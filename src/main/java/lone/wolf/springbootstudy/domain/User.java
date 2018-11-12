@@ -28,7 +28,7 @@ public class User {
     //@JsonProperty("account")
     //@JsonInclude(JsonInclude.Include.NON_NULL)
     private String phone;
-    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",locale = "zh",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",locale = "zh",timezone = "GMT+8")
     private Date createTime;
 
     public User() {
