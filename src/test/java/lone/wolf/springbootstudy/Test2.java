@@ -1,5 +1,6 @@
 package lone.wolf.springbootstudy;
 
+import lone.wolf.springbootstudy.config.ApplicationProperties;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,15 @@ public class Test2 {
         int status = mvcResult.getResponse().getStatus();
         System.out.println(status);
 
+    }
+
+    @Test
+    public void testUtil(){
+        String localhoost = ApplicationProperties.getProperties("spring.redis.host", "localhoost");
+        System.out.println(localhoost);
+        Integer integer = ApplicationProperties.getInteger("spring.redis.host", 111);
+        System.out.println("输出: "+integer);
+        String properties = ApplicationProperties.getProperties("spring.redis.jedis.pool.max-wait", null);
+        System.out.println("输出: "+properties);
     }
 }

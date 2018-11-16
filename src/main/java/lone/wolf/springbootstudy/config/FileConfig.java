@@ -22,8 +22,10 @@ public class FileConfig {
     @Bean
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
+        //2014KB,单个文件最大限制
         DataSize size = DataSize.ofKilobytes(1024);
         factory.setMaxFileSize(size);
+        //2MB，总上传的数据大小限制
         factory.setMaxRequestSize(DataSize.ofMegabytes(2));
         return factory.createMultipartConfig();
     }

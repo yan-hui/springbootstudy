@@ -1,6 +1,7 @@
 package lone.wolf.springbootstudy.controller;
 
 import lone.wolf.springbootstudy.domain.User;
+import lone.wolf.springbootstudy.utils.JsonResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -54,4 +55,10 @@ public class SimpleController {
     return new User("nani","qwe",22,"123",new Date());
 
    }
+    @GetMapping("/v1/test3")
+   public JsonResult<User> test3(){
+       User user = new User("nani", "qwe", 22, "123", new Date());
+       return JsonResult.success(0,user);
+   }
+
 }
