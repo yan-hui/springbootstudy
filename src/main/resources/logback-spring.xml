@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <!--
+	       说明：
+	       1、日志级别及文件
+	           日志记录采用分级记录，级别与日志文件名相对应，不同级别的日志信息记录到不同的日志文件中
+	           例如：error级别记录到log_error_xxx.log或log_error.log（该文件为当前记录的日志文件），而log_error_xxx.log为归档日志，
+	           日志文件按日期记录，同一天内，若日志文件大小等于或大于2M，则按0、1、2...顺序分别命名
+	           例如log-level-2013-12-21.0.log
+	           其它级别的日志也是如此。
+	       2、文件路径
+	           若开发、测试用，在Eclipse中运行项目，则到Eclipse的安装路径查找logs文件夹，以相对路径../logs。
+	           若部署到Tomcat下，则在Tomcat下的logs文件中
+	       3、Appender
+        FILEERROR对应error级别，文件名以log-error-xxx.log形式命名
+        FILEERROR对应error级别，文件名以log-error-xxx.log形式命名
+        FILEWARN对应warn级别，文件名以log-warn-xxx.log形式命名
+        FILEINFO对应info级别，文件名以log-info-xxx.log形式命名
+        FILE对应所有级别，文件名以log-xxx.log形式命名
+        //FILEDEBUG对应debug级别，文件名以log-debug-xxx.log形式命名
+        stdout将日志信息输出到控制上，为方便开发测试使用
+    -->
+    <contextName>MySpringBoot</contextName>
+    <appender name="consoleApp" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                -->%red(%date{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%-5level) %green([%thread]) %boldMagenta(%logger){56}.%method:%L - %cyan(%msg%n)
+            </pattern>
+        </layout>
+    </appender>
+
+    <appender name="fileInfoApp" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>
+                %date{yyyy-MM-dd HH:mm:ss.SSS} %-5level[%thread]%logger{56}.%method:%L -%msg%n
+            </pattern>
+        </encoder>
+        <!-- 滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 路径 -->
+            <fileNamePattern>app_log/log/app.info.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="fileErrorApp" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>
+                -->%red(%date{yyyy-MM-dd HH:mm:ss.SSS}) %highlight(%-5level) %green([%thread]) %boldMagenta(%logger){56}.%method:%L - %cyan(%msg%n)
+            </pattern>
+        </encoder>
+
+        <!-- 设置滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 路径 -->
+            <fileNamePattern>app_log/log/app.err.%d.log</fileNamePattern>
+
+            <!-- 控制保留的归档文件的最大数量，超出数量就删除旧文件，假设设置每个月滚动，
+            且<maxHistory> 是1，则只保存最近1个月的文件，删除之前的旧文件 -->
+            <MaxHistory>1</MaxHistory>
+
+        </rollingPolicy>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="consoleApp"/>
+        <appender-ref ref="fileInfoApp"/>
+        <appender-ref ref="fileErrorApp"/>
+    </root>
+</configuration>
