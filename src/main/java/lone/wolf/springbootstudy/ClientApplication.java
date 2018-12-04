@@ -26,20 +26,9 @@ public class ClientApplication {
  *
  */
 @SpringBootApplication
-@ServletComponentScan
-//mybatis扫描
-@MapperScan("lone.wolf.springbootstudy.mapper")
-//开启定时任务
-//@EnableScheduling
-//开启异步任务
-//@EnableAsync
 //开启支持jms
 @EnableJms
 public class ClientApplication /*extends SpringBootServletInitializer*/ {
-  /*  @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(ClientApplication.class);
-    }*/
 
     public static void main(String[] args) {
         // 设置环境变量，解决Es的netty与Netty服务本身不兼容问题

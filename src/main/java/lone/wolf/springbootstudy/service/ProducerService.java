@@ -23,4 +23,11 @@ public interface ProducerService {
      * @param message 待发送的消息
      */
     public void sendMessage(final String message);
+
+    /**
+     * 消息发布者
+     * @param msg
+     * @return
+     */
+    public void publish(String msg);
 }

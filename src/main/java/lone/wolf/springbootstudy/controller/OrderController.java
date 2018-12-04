@@ -34,4 +34,15 @@ public class OrderController {
         producerService.sendMessage(msg);
         return JsonResult.success();
     }
+
+    /**
+     * 发布消息，生产者
+     * @param msg
+     * @return
+     */
+    @GetMapping("/topic")
+    public JsonResult topic(String msg) {
+        producerService.publish(msg);
+        return JsonResult.success();
+    }
 }

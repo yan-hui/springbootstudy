@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.jms.Destination;
 import javax.jms.Queue;
+import javax.jms.Topic;
 
 /**
  * @Description 消息生产者业务类
@@ -18,6 +19,9 @@ public class ProducerServiceImpl implements ProducerService {
 
     @Autowired
     private Queue queue;
+    @Autowired
+    private Topic topic;
+
     /**
      *发送消息的broker对象
      *
@@ -35,5 +39,10 @@ public class ProducerServiceImpl implements ProducerService {
     public void sendMessage(String message) {
         jmsTemplate.convertAndSend(this.queue,message);
 
+    }
+    /**********************发布订阅************************************/
+    @Override
+    public void publish(String msg) {
+        jmsTemplate.convertAndSend(this.topic,msg);
     }
 }
